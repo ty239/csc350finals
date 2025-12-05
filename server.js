@@ -3,7 +3,7 @@ const session = require("express-session");
 const cors = require("cors");
 const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
-const nodemailer = require("nodemailer");
+const sgMail = require("@sendgrid/mail");
 const path = require("path");
 require("dotenv").config();
 
@@ -19,14 +19,8 @@ const pool = new Pool({
   database: process.env.DB_NAME,
 });
 
-// Email transporter
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+// SendGrid setup
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 // Middleware
 app.use(cors());
@@ -331,9 +325,9 @@ app.post("/api/checkout", requireAuth, async (req, res) => {
       )
       .join("\n");
 
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.ADMIN_EMAIL,
+    const msg = {
+      to: process.env.ADMIN_EMAIL || "admin@example.com",
+      from: process.env.SENDGRID_FROM_EMAIL || "noreply@sportsshop.com",
       subject: "New Order Received - Sports Shop",
       text: `${
         req.session.fullName
@@ -342,13 +336,14 @@ app.post("/api/checkout", requireAuth, async (req, res) => {
       )}`,
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log("Email sent successfully");
+      })
+      .catch((error) => {
         console.error("Email error:", error);
-      } else {
-        console.log("Email sent:", info.response);
-      }
-    });
+      });
 
     res.json({
       success: true,

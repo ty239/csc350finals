@@ -28,9 +28,11 @@ services:
           property: database
       - key: SESSION_SECRET
         generateValue: true
-      - key: EMAIL_USER
+      - key: SENDGRID_API_KEY
         sync: false
-      - key: EMAIL_PASS
+      - key: SENDGRID_FROM_EMAIL
+        value: noreply@sportsshop.com
+      - key: ADMIN_EMAIL
         sync: false
 
 databases:
