@@ -2,20 +2,59 @@
 set -e
 
 # Set default PORT if not provided
-PORT=${PORT:-80}
+export PORT=${PORT:-10000}
 
-# Substitute PORT in nginx config
-envsubst '${PORT}' < /etc/nginx/nginx.conf > /tmp/nginx.conf
-mv /tmp/nginx.conf /etc/nginx/nginx.conf
+# Create nginx config directory
+mkdir -p /etc/nginx/http.d
 
-# Start PHP-FPM
+# Write nginx config with PORT substitution
+cat > /etc/nginx/http.d/default.conf << EOF
+server {
+    listen ${PORT} default_server;
+    server_name _;
+    root /app/public;
+    index index.php index.html;
+
+    # Serve static files
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # Handle PHP files
+    location ~ \.php$ {
+        try_files \$uri =404;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+    }
+
+    # Proxy API requests to Node.js
+    location /api/ {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host \$host;
+        proxy_cache_bypass \$http_upgrade;
+    }
+
+    # Default location
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOF
+
+# Start PHP-FPM in background
 php-fpm83 -F -y /etc/php83/php-fpm.d/www.conf &
 
-# Start Nginx
+# Start Nginx in background
 nginx -g 'daemon off;' &
 
-# Wait for services
-sleep 3
+# Wait for services to start
+sleep 2
 
-# Start Node.js app
+# Start Node.js app in foreground
 exec npm start

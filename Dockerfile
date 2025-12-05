@@ -1,8 +1,8 @@
 # Use Node.js LTS version
 FROM node:18-alpine
 
-# Install PHP-FPM, Nginx, and gettext for envsubst
-RUN apk add --no-cache php83 php83-fpm nginx gettext
+# Install PHP-FPM and Nginx
+RUN apk add --no-cache php83 php83-fpm nginx
 
 # Set working directory
 WORKDIR /app
@@ -16,8 +16,7 @@ RUN npm install
 # Copy application files
 COPY . .
 
-# Copy Nginx and PHP-FPM configuration
-COPY nginx.conf /etc/nginx/nginx.conf
+# Copy PHP-FPM configuration
 COPY php-fpm.conf /etc/php83/php-fpm.d/www.conf
 
 # Make start script executable
