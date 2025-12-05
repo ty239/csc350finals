@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports Shop - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .hero-btn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        .hero-btn:hover {
+            transform: translateY(-3px);
+        }
+        .hero-btn-primary {
+            background: white;
+            color: #667eea;
+        }
+        .hero-btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        .features {
+            padding: 60px 20px;
+            background: white;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        .feature-card h3 {
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">⚡ Sports Shop</h1>
+            <div class="nav-links">
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>Welcome to Sports Shop</h1>
+        <p>Your one-stop destination for cricket, basketball, soccer, football, and baseball equipment</p>
+        <div class="hero-buttons">
+            <a href="register.html" class="hero-btn hero-btn-primary">Get Started</a>
+            <a href="login.html" class="hero-btn hero-btn-secondary">Login</a>
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏏</div>
+                <h3>Cricket Equipment</h3>
+                <p>Professional bats, balls, helmets, and protective gear</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏀</div>
+                <h3>Basketball Gear</h3>
+                <p>Basketballs, shoes, jerseys, and training equipment</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚽</div>
+                <h3>Soccer Equipment</h3>
+                <p>Soccer balls, cleats, goalkeeper gloves, and goals</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏈</div>
+                <h3>Football Gear</h3>
+                <p>Footballs, helmets, pads, and training equipment</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚾</div>
+                <h3>Baseball Equipment</h3>
+                <p>Bats, gloves, balls, and catcher gear</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛒</div>
+                <h3>Easy Shopping</h3>
+                <p>Simple cart management and secure checkout</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
