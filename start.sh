@@ -4,6 +4,8 @@ set -e
 # Set default PORT if not provided
 export PORT=${PORT:-10000}
 
+echo "Starting services on PORT: $PORT"
+
 # Create nginx config directory
 mkdir -p /etc/nginx/http.d
 
@@ -47,14 +49,19 @@ server {
 }
 EOF
 
-# Start PHP-FPM in background
+echo "Starting PHP-FPM..."
 php-fpm83 -F -y /etc/php83/php-fpm.d/www.conf &
+PHP_PID=$!
 
-# Start Node.js in background
-node server.js &
+echo "Starting Node.js server..."
+node server.js > /tmp/node.log 2>&1 &
+NODE_PID=$!
 
 # Wait for services to start
-sleep 2
+sleep 3
+
+echo "Starting Nginx..."
+echo "PHP-FPM PID: $PHP_PID, Node.js PID: $NODE_PID"
 
 # Start Nginx in foreground (keeps container alive)
 exec nginx -g 'daemon off;'
