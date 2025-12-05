@@ -35,6 +35,7 @@
         </div>
     </div>
 
+    <script src="db.js"></script>
     <script src="auth.js"></script>
 </body>
 </html>
