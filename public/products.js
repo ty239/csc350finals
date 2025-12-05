@@ -9,7 +9,7 @@ async function checkAuth() {
     const data = await response.json();
 
     if (!data.loggedIn) {
-      window.location.href = "login.php";
+      window.location.href = "login.html";
       return;
     }
 
@@ -30,7 +30,7 @@ document.getElementById("logoutBtn").addEventListener("click", async (e) => {
   e.preventDefault();
   try {
     await fetch("/api/logout", { method: "POST" });
-    window.location.href = "login.php";
+    window.location.href = "login.html";
   } catch (error) {
     console.error("Logout error:", error);
   }

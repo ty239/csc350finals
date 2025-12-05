@@ -6,10 +6,10 @@ async function checkSession() {
 
     if (
       data.loggedIn &&
-      (window.location.pathname === "/login.php" ||
-        window.location.pathname === "/register.php")
+      (window.location.pathname === "/login.html" ||
+        window.location.pathname === "/register.html")
     ) {
-      window.location.href = "products.php";
+      window.location.href = "products.html";
     }
   } catch (error) {
     console.error("Session check error:", error);
@@ -44,7 +44,7 @@ if (document.getElementById("registerForm")) {
 
         if (response.ok) {
           alert("Registration successful! Please login.");
-          window.location.href = "login.php";
+          window.location.href = "login.html";
         } else {
           errorMessage.textContent = data.error || "Registration failed";
         }
@@ -78,7 +78,7 @@ if (document.getElementById("loginForm")) {
       const data = await response.json();
 
       if (response.ok) {
-        window.location.href = "products.php";
+        window.location.href = "products.html";
       } else {
         errorMessage.textContent = data.error || "Login failed";
       }
