@@ -8,7 +8,7 @@ const path = require("path");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000; // Always use 3000 internally, Nginx proxies from PORT env var
 
 // PostgreSQL connection pool
 const pool = new Pool({
