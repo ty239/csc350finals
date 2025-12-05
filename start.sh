@@ -1,10 +1,14 @@
 #!/bin/sh
+set -e
 
-# Start PHP-FPM in background
-php-fpm83 &
+# Start PHP-FPM
+php-fpm83 -F -y /etc/php83/php-fpm.d/www.conf &
 
-# Start Nginx in background
-nginx &
+# Start Nginx
+nginx -g 'daemon off;' &
 
-# Start Node.js app (foreground)
-npm start
+# Wait for services
+sleep 3
+
+# Start Node.js app
+exec npm start

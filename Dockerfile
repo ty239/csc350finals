@@ -19,6 +19,9 @@ COPY . .
 # Copy Nginx config
 COPY nginx.conf /etc/nginx/http.d/default.conf
 
+# Copy PHP-FPM config
+COPY php-fpm.conf /etc/php83/php-fpm.d/www.conf
+
 # Copy start script
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
