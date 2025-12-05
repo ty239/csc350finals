@@ -7,7 +7,7 @@ async function checkAuth() {
     const data = await response.json();
 
     if (!data.loggedIn) {
-      window.location.href = "login.php";
+      window.location.href = "login.html";
       return;
     }
 
