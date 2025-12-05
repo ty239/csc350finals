@@ -50,11 +50,11 @@ EOF
 # Start PHP-FPM in background
 php-fpm83 -F -y /etc/php83/php-fpm.d/www.conf &
 
-# Start Nginx in background
-nginx -g 'daemon off;' &
+# Start Node.js in background
+node server.js &
 
 # Wait for services to start
 sleep 2
 
-# Start Node.js app in foreground
-exec npm start
+# Start Nginx in foreground (keeps container alive)
+exec nginx -g 'daemon off;'
