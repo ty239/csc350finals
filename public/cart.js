@@ -1,5 +1,16 @@
 let cartItems = [];
 
+// Load cart from localStorage as backup
+function loadLocalCart() {
+  const saved = localStorage.getItem('cart');
+  return saved ? JSON.parse(saved) : [];
+}
+
+// Save cart to localStorage
+function saveLocalCart(items) {
+  localStorage.setItem('cart', JSON.stringify(items));
+}
+
 // Check authentication
 async function checkAuth() {
   try {
@@ -34,9 +45,13 @@ async function loadCart() {
   try {
     const response = await fetch("/api/cart");
     cartItems = await response.json();
+    saveLocalCart(cartItems); // Save to localStorage
     displayCart();
   } catch (error) {
     console.error("Error loading cart:", error);
+    // Fallback to localStorage if server fails
+    cartItems = loadLocalCart();
+    displayCart();
   }
 }
 

@@ -6,8 +6,36 @@ export PORT=${PORT:-10000}
 
 echo "Starting services on PORT: $PORT"
 
+# Verify files exist
+echo "Checking /app/public contents:"
+ls -la /app/public/
+
 # Create nginx config directory
 mkdir -p /etc/nginx/http.d
+
+# Remove default nginx config if exists
+rm -f /etc/nginx/http.d/default.conf
+
+# Create main nginx.conf
+cat > /etc/nginx/nginx.conf << 'NGINX_EOF'
+worker_processes 1;
+error_log /dev/stderr warn;
+pid /var/run/nginx.pid;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    access_log /dev/stdout;
+    sendfile on;
+    keepalive_timeout 65;
+    
+    include /etc/nginx/http.d/*.conf;
+}
+NGINX_EOF
 
 # Write nginx config with PORT substitution
 cat > /etc/nginx/http.d/default.conf << EOF
