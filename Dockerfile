@@ -1,6 +1,9 @@
 # Use Node.js LTS version
 FROM node:18-alpine
 
+# Install PHP-FPM, Nginx, and gettext for envsubst
+RUN apk add --no-cache php83 php83-fpm nginx gettext
+
 # Set working directory
 WORKDIR /app
 
@@ -13,8 +16,15 @@ RUN npm install
 # Copy application files
 COPY . .
 
-# Expose port
-EXPOSE 3000
+# Copy Nginx and PHP-FPM configuration
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY php-fpm.conf /etc/php83/php-fpm.d/www.conf
 
-# Start the application
-CMD ["npm", "start"]
+# Make start script executable
+RUN chmod +x start.sh
+
+# Expose ports
+EXPOSE 3000 80
+
+# Start all services
+CMD ["./start.sh"]
