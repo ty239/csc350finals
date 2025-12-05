@@ -4,8 +4,6 @@ services:
     env: docker
     dockerfilePath: ./Dockerfile
     envVars:
-      - key: PORT
-        value: 3000
       - key: DB_HOST
         fromDatabase:
           name: sports-shop-db
