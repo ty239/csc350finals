@@ -11,7 +11,7 @@
         <div class="container">
             <h1 class="logo">⚡ Sports Shop</h1>
             <div class="nav-links">
-                <a href="login.html">Login</a>
+                <a href="login.php">Login</a>
             </div>
         </div>
     </nav>
@@ -39,7 +39,7 @@
                 <div id="errorMessage" class="error-message"></div>
                 <button type="submit" class="btn btn-primary">Register</button>
             </form>
-            <p class="auth-link">Already have an account? <a href="login.html">Login here</a></p>
+            <p class="auth-link">Already have an account? <a href="login.php">Login here</a></p>
         </div>
     </div>
 

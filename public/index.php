@@ -75,18 +75,18 @@
         <div class="container">
             <h1 class="logo">⚡ Sports Shop</h1>
             <div class="nav-links">
-                <a href="login.html">Login</a>
-                <a href="register.html">Register</a>
+                <a href="login.php">Login</a>
+                <a href="register.php">Register</a>
             </div>
         </div>
     </nav>
 
     <div class="hero">
         <h1>Welcome to Sports Shop</h1>
-        <p>Your one-stop destination for cricket, basketball, soccer, football, and baseball equipment</p>
+        <p>Your one-stop destination for cricket, basketball, and soccer equipment</p>
         <div class="hero-buttons">
-            <a href="register.html" class="hero-btn hero-btn-primary">Get Started</a>
-            <a href="login.html" class="hero-btn hero-btn-secondary">Login</a>
+            <a href="register.php" class="hero-btn hero-btn-primary">Get Started</a>
+            <a href="login.php" class="hero-btn hero-btn-secondary">Login</a>
         </div>
     </div>
 
@@ -106,16 +106,6 @@
                 <div class="feature-icon">⚽</div>
                 <h3>Soccer Equipment</h3>
                 <p>Soccer balls, cleats, goalkeeper gloves, and goals</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🏈</div>
-                <h3>Football Gear</h3>
-                <p>Footballs, helmets, pads, and training equipment</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚾</div>
-                <h3>Baseball Equipment</h3>
-                <p>Bats, gloves, balls, and catcher gear</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">🛒</div>

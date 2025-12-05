@@ -12,7 +12,7 @@
             <h1 class="logo">⚡ Sports Shop</h1>
             <div class="nav-links">
                 <span id="welcomeMessage"></span>
-                <a href="cart.html">🛒 Cart <span id="cartCount" class="cart-badge">0</span></a>
+                <a href="cart.php">🛒 Cart <span id="cartCount" class="cart-badge">0</span></a>
                 <a href="#" id="logoutBtn">Logout</a>
             </div>
         </div>
@@ -26,8 +26,6 @@
                 <button class="filter-btn" data-category="cricket">Cricket</button>
                 <button class="filter-btn" data-category="basketball">Basketball</button>
                 <button class="filter-btn" data-category="soccer">Soccer</button>
-                <button class="filter-btn" data-category="football">Football</button>
-                <button class="filter-btn" data-category="baseball">Baseball</button>
             </div>
         </div>
 

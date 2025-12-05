@@ -7,14 +7,14 @@ async function checkAuth() {
     const data = await response.json();
 
     if (!data.loggedIn) {
-      window.location.href = "login.html";
+      window.location.href = "login.php";
       return;
     }
 
     loadCart();
   } catch (error) {
     console.error("Auth check error:", error);
-    window.location.href = "login.html";
+    window.location.href = "login.php";
   }
 }
 
@@ -23,7 +23,7 @@ document.getElementById("logoutBtn").addEventListener("click", async (e) => {
   e.preventDefault();
   try {
     await fetch("/api/logout", { method: "POST" });
-    window.location.href = "login.html";
+    window.location.href = "login.php";
   } catch (error) {
     console.error("Logout error:", error);
   }
@@ -180,7 +180,7 @@ document.getElementById("checkoutBtn").addEventListener("click", async () => {
           2
         )}\nOrder confirmation has been sent to the store owner.`
       );
-      window.location.href = "products.html";
+      window.location.href = "products.php";
     } else {
       alert(data.error || "Checkout failed");
     }

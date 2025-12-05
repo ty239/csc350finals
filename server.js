@@ -4,6 +4,7 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -362,6 +363,11 @@ app.post("/api/checkout", requireAuth, async (req, res) => {
   } finally {
     client.release();
   }
+});
+
+// Serve index.php at root
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.php"));
 });
 
 // Start server

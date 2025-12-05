@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: sports-shop
+    env: docker
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: 80
+      - key: DB_HOST
+        fromDatabase:
+          name: sports-shop-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: sports-shop-db
+          property: port
+      - key: DB_USER
+        fromDatabase:
+          name: sports-shop-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: sports-shop-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: sports-shop-db
+          property: database
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+
+databases:
+  - name: sports-shop-db
+    databaseName: sports_shop
+    user: postgres
