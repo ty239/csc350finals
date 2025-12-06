@@ -2,13 +2,13 @@ let cartItems = [];
 
 // Load cart from localStorage as backup
 function loadLocalCart() {
-  const saved = localStorage.getItem('cart');
+  const saved = localStorage.getItem("cart");
   return saved ? JSON.parse(saved) : [];
 }
 
 // Save cart to localStorage
 function saveLocalCart(items) {
-  localStorage.setItem('cart', JSON.stringify(items));
+  localStorage.setItem("cart", JSON.stringify(items));
 }
 
 // Check authentication

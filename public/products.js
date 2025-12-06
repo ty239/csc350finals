@@ -136,15 +136,15 @@ async function addToCart(productId) {
 
     if (response.ok) {
       // Save to localStorage as backup
-      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-      const existing = cart.find(item => item.product_id === productId);
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const existing = cart.find((item) => item.product_id === productId);
       if (existing) {
         existing.quantity += 1;
       } else {
         cart.push({ product_id: productId, quantity: 1 });
       }
-      localStorage.setItem('cart', JSON.stringify(cart));
-      
+      localStorage.setItem("cart", JSON.stringify(cart));
+
       alert("Product added to cart!");
       updateCartCount();
       loadProducts(); // Refresh to update stock display

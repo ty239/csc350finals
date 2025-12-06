@@ -13,7 +13,10 @@ const PORT = process.env.PORT || 3000; // Use Render's PORT
 // PostgreSQL connection pool
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+  ssl:
+    process.env.NODE_ENV === "production"
+      ? { rejectUnauthorized: false }
+      : false,
 });
 
 // SendGrid setup
@@ -98,6 +101,7 @@ app.post("/api/login", async (req, res) => {
     req.session.userId = user.id;
     req.session.username = user.username;
     req.session.fullName = user.full_name;
+    req.session.email = user.email;
 
     res.json({
       success: true,
@@ -336,10 +340,37 @@ app.post("/api/checkout", requireAuth, async (req, res) => {
     sgMail
       .send(msg)
       .then(() => {
-        console.log("Email sent successfully");
+        console.log("Admin email sent successfully to:", msg.to);
       })
       .catch((error) => {
-        console.error("Email error:", error);
+        console.error(
+          "Admin email error:",
+          error.response ? error.response.body : error
+        );
+      });
+
+    // Send customer confirmation email
+    const customerMsg = {
+      to: req.session.email,
+      from: process.env.SENDGRID_FROM_EMAIL || "noreply@sportsshop.com",
+      subject: "Order Confirmation - Sports Shop",
+      text: `Hi ${
+        req.session.fullName
+      },\n\nThank you for your order!\n\nOrder Details:\n${itemsList}\n\nTotal: $${total.toFixed(
+        2
+      )}\n\nYour order is being processed and will be shipped soon.\n\nThank you for shopping with Sports Shop!`,
+    };
+
+    sgMail
+      .send(customerMsg)
+      .then(() => {
+        console.log("Customer email sent successfully to:", customerMsg.to);
+      })
+      .catch((error) => {
+        console.error(
+          "Customer email error:",
+          error.response ? error.response.body : error
+        );
       });
 
     res.json({
