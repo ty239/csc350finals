@@ -195,7 +195,7 @@ document.getElementById("checkoutBtn").addEventListener("click", async () => {
           2
         )}\nOrder confirmation has been sent to the store owner.`
       );
-      window.location.href = "products.php";
+      window.location.href = "products.html";
     } else {
       alert(data.error || "Checkout failed");
     }
